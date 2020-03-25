@@ -1,5 +1,5 @@
 import React from 'react'
-import { Navbar, Nav } from 'react-bootstrap'
+import { Navbar, Form, FormControl, Button } from 'react-bootstrap'
 import { Helmet } from 'react-helmet'
 import { useStaticResolver } from 'resolve-react-hooks'
 
@@ -26,6 +26,10 @@ const Header = ({ title, name, css, favicon }) => {
       <Navbar variant="dark" bg="primary" collapseOnSelect>
         <Navbar.Brand href="/">{name}</Navbar.Brand>
         <Navbar.Toggle />
+        <Form inline className="float-right">
+          <FormControl type="text" placeholder="topic" className="mr-sm-2" />
+          <Button variant="info">Open Chat</Button>
+        </Form>
       </Navbar>
     </div>
   )
