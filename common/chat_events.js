@@ -1,0 +1,4 @@
+export const CHAT_OPENED = 'CHAT_OPENED'
+export const CHAT_CLOSED = 'CHAT_CLOSED'
+export const CHAT_USER_JOINED = 'CHAT_USER_JOINED'
+export const CHAT_USER_LEAVED = 'CHAT_USER_LEAVED'
