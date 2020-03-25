@@ -1,19 +1,54 @@
 extends:
-  - eslint:recommended
+  - prettier
   - airbnb-base
+  - eslint:recommended
+  - plugin:react/recommended
   - plugin:prettier/recommended
+  - plugin:import/errors
+  - plugin:import/warnings
+  - plugin:import/typescript
+
+plugins:
+  - react
+
+parserOptions:
+  ecmaVersion: 2018
+  sourceType: module
+  ecmaFeatures:
+    jsx: true
+
 env:
   es6: true
   node: true
   jest: true
+  browser: true
+
+globals:
+  fetch: false
+  document: false
+  window: false
+
 rules:
+  import/extensions: ['error', 'ignorePackages', {
+    "js": "never",
+    "jsx": "never",
+    "ts": "never",
+    "tsx": "never"
+  }
+  ]
+  newline-per-chained-call: ['warn', { ignoreChainWithDepth: 2 } ]
+  dot-notation: 'off'
   no-console: 'off'
   no-plusplus: 'off'
   no-param-reassign: ['error', { props: false }]
   no-restricted-syntax: ['off', 'ForInStatement', 'ForOfStatement']
   no-await-in-loop: 'off'
   class-methods-use-this: 'off'
+  lines-between-class-members: 'off'
   semi: 'off'
   curly: ['error', 'all']
-  import/no-unresolved: ['error', { ignore: ['aws-sdk'] }]
   linebreak-style: 'off'
+  import/prefer-default-export: 'off'
+  import/no-extraneous-dependencies: 'off'
+  max-classes-per-file: 'off'
+  react/prop-types: 'off'
