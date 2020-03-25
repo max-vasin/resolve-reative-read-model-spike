@@ -83,10 +83,8 @@ const devConfig = {
         tableName: 'customTableName'
       }
     }
-  */ subscribeAdapter: {
-    module: 'resolve-subscribe-socket.io',
-    options: {}
-  },
+  */
+
   /*
     {
       module: 'resolve-subscribe-mqtt',
@@ -95,6 +93,15 @@ const devConfig = {
   */ jwtCookie: {
     name: 'jwt',
     maxAge: 31536000000
+  },
+  schedulers: {
+    scheduler: {
+      adapter: {
+        module: 'resolve-scheduler-local',
+        options: {}
+      },
+      connectorName: 'default'
+    }
   }
 }
 

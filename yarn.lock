@@ -4535,6 +4535,11 @@ dom-helpers@^3.2.0, dom-helpers@^3.2.1, dom-helpers@^3.4.0:
   dependencies:
     "@babel/runtime" "^7.1.2"
 
+dom-walk@^0.1.0:
+  version "0.1.1"
+  resolved "http://npm.resolve-dev.ml:10080/dom-walk/-/dom-walk-0.1.1.tgz#672226dc74c8f799ad35307df936aba11acd6018"
+  integrity sha1-ZyIm3HTI95mtNTB9+TaroRrNYBg=
+
 domain-browser@^1.1.1:
   version "1.2.0"
   resolved "http://npm.resolve-dev.ml:10080/domain-browser/-/domain-browser-1.2.0.tgz#3d31f50191a6749dd1375a7f522e823d42e54eda"
@@ -5809,6 +5814,14 @@ glob@^7.0.3, glob@^7.1.1, glob@^7.1.2, glob@^7.1.3, glob@^7.1.4:
     minimatch "^3.0.4"
     once "^1.3.0"
     path-is-absolute "^1.0.0"
+
+global@^4.4.0:
+  version "4.4.0"
+  resolved "http://npm.resolve-dev.ml:10080/global/-/global-4.4.0.tgz#3e7b105179006a323ed71aafca3e9c57a5cc6406"
+  integrity sha512-wv/LAoHdRE3BeTGz53FAamhGlPLhlssK45usmGFThIi4XqnBmjKQ16u+RNbP7WvigRZDxUsM0J3gcQ5yicaL0w==
+  dependencies:
+    min-document "^2.19.0"
+    process "^0.11.10"
 
 globals@^11.1.0, globals@^11.7.0:
   version "11.12.0"
@@ -8401,6 +8414,13 @@ mimic-response@^1.0.0, mimic-response@^1.0.1:
   resolved "http://npm.resolve-dev.ml:10080/mimic-response/-/mimic-response-1.0.1.tgz#4923538878eef42063cb8a3e3b0798781487ab1b"
   integrity sha512-j5EctnkH7amfV/q5Hgmoal1g2QHFJRraOtmx0JpIqkxhBhI/lJSl1nMpQ45hVarwNETOoWEimndZ4QK0RHxuxQ==
 
+min-document@^2.19.0:
+  version "2.19.0"
+  resolved "http://npm.resolve-dev.ml:10080/min-document/-/min-document-2.19.0.tgz#7bd282e3f5842ed295bb748cdd9f1ffa2c824685"
+  integrity sha1-e9KC4/WELtKVu3SM3Z8f+iyCRoU=
+  dependencies:
+    dom-walk "^0.1.0"
+
 minimalistic-assert@^1.0.0, minimalistic-assert@^1.0.1:
   version "1.0.1"
   resolved "http://npm.resolve-dev.ml:10080/minimalistic-assert/-/minimalistic-assert-1.0.1.tgz#2e194de044626d4a10e7f7fbc00ce73e83e4d5c7"
@@ -8688,7 +8708,7 @@ node-fetch@^1.0.1:
     encoding "^0.1.11"
     is-stream "^1.0.1"
 
-node-fetch@^2.2.0:
+node-fetch@^2.2.0, node-fetch@^2.6.0:
   version "2.6.0"
   resolved "http://npm.resolve-dev.ml:10080/node-fetch/-/node-fetch-2.6.0.tgz#e633456386d4aa55863f676a7ab0daa8fdecb0fd"
   integrity sha512-8dG4H5ujfvFiqDmVu9fQ5bOHUC15JMjMY/Zumv26oOvvVJjM67KF8koCWIabKQ1GJIa9r2mMZscBq/TbdOcmNA==
@@ -10343,6 +10363,16 @@ resolve-api-handler-express@0.23.0:
     mime-types "2.1.25"
     raw-body "2.3.3"
 
+resolve-client@0.23.2:
+  version "0.23.2"
+  resolved "http://npm.resolve-dev.ml:10080/resolve-client/-/resolve-client-0.23.2.tgz#c779b87779c09ddb942370b4fd3e05b9c86ed38c"
+  integrity sha512-SY338QkakJD1WYYM13LQ9HjGLdw7bvkrN5eoz+gtzWZ7D39go4oB6GKvtAr7LcH3Grmz3hoM1H943NSnCqXAFw==
+  dependencies:
+    global "^4.4.0"
+    node-fetch "^2.6.0"
+    query-string "^5.1.1"
+    unfetch "^4.1.0"
+
 resolve-cloud@*:
   version "0.13.0"
   resolved "http://npm.resolve-dev.ml:10080/resolve-cloud/-/resolve-cloud-0.13.0.tgz#86285ef35ddf35565d35d9a0dc004f94156563ec"
@@ -10455,6 +10485,13 @@ resolve-query@0.23.0:
   dependencies:
     "@babel/runtime" "^7.0.0"
     resolve-debug-levels "0.23.0"
+
+resolve-react-hooks@^0.23.2:
+  version "0.23.2"
+  resolved "http://npm.resolve-dev.ml:10080/resolve-react-hooks/-/resolve-react-hooks-0.23.2.tgz#e33805b86d608dece5b29a816bfbfbb0d3b0da74"
+  integrity sha512-OrlQ2BrH05qA2ULwj85DD99TaL5JdnE77Hu9tdsWhl+h7kz5HQVpffbNgSEW4WLPVhgG+M0o2Ce6eASZQwGJFg==
+  dependencies:
+    resolve-client "0.23.2"
 
 resolve-readmodel-base@0.23.0:
   version "0.23.0"
@@ -12376,7 +12413,7 @@ uncontrollable@^4.1.0:
   dependencies:
     invariant "^2.1.0"
 
-unfetch@^4.0.1:
+unfetch@^4.0.1, unfetch@^4.1.0:
   version "4.1.0"
   resolved "http://npm.resolve-dev.ml:10080/unfetch/-/unfetch-4.1.0.tgz#6ec2dd0de887e58a4dee83a050ded80ffc4137db"
   integrity sha512-crP/n3eAPUJxZXM9T80/yv0YhkTEx2K1D3h7D1AJM6fzsWZrxdyRuLN0JH/dkZh1LNH8LxCnBzoPFCPbb2iGpg==

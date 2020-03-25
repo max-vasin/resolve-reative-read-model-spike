@@ -1,11 +1,30 @@
 const appConfig = {
   aggregates: [
     {
-      name: 'aggregate-name',
-      commands: 'common/aggregates/aggregate-name.commands.js',
-      projection: 'common/aggregates/aggregate-name.projection.js'
+      name: 'chat',
+      commands: 'common/aggregates/chat.commands.js',
+      projection: 'common/aggregates/chat.projection.js'
+    },
+    {
+      name: 'message',
+      commands: 'common/aggregates/message.commands.js',
+      projection: 'common/aggregates/message.projection.js'
+    },
+    {
+      name: 'user',
+      commands: 'common/aggregates/user.commands.js',
+      projection: 'common/aggregates/user.projection.js'
     }
   ],
+  sagas: [
+    {
+      name: 'reactive-read-model-emulator',
+      source: 'common/sagas/reactive-read-model.saga.js',
+      connectorName: 'default',
+      schedulerName: 'scheduler'
+    }
+  ],
+  /*
   readModels: [
     {
       name: 'read-model-name',
@@ -14,6 +33,7 @@ const appConfig = {
       connectorName: 'default'
     }
   ],
+
   viewModels: [
     {
       name: 'view-model-name',
@@ -23,6 +43,7 @@ const appConfig = {
         'common/view-models/view-model-name.deserialize_state.js'
     }
   ],
+  */
   clientEntries: ['client/index.js']
 }
 
