@@ -1,3 +1,6 @@
+import axios from 'axios'
+import { port } from '../../retranslator/constants'
+
 export const dispatch = async (store, name, viewProjection, id, handler, payload) => {
   const entry = await store.findOne(`${name}-views`, { id })
 
@@ -19,7 +22,14 @@ export const dispatch = async (store, name, viewProjection, id, handler, payload
     }
   )
 
-  // TODO: push to socket!
+  const reTranslator = `http://localhost:${port}`
+
+  await axios.post(`${reTranslator}`, {
+    model: name,
+    id,
+    handler,
+    payload
+  })
 }
 
 export const initDispatcher = async (store, name) => {

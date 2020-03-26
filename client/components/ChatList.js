@@ -34,13 +34,13 @@ const ChatList = () => {
         ])
       } else {
         setChats(result.data.chats)
+        connect(result.data, 'chat-list', 'all', data => setChats(data.chats))
       }
     }
   )
 
   useEffect(() => {
     fetchChats()
-    connect('chat-list', 'all', console.log)
   }, [])
 
   return (

@@ -18,14 +18,12 @@ app.post('/', (req, res) => {
 
   const room = getRoom(model, id)
   const notification = 'update-model'
-  console.log(`posting ${notification} to ${room}`)
-  io.to(room).emit(
-    notification,
-    JSON.stringify({
-      handler,
-      payload
-    })
-  )
+  const data = JSON.stringify({
+    handler,
+    payload
+  })
+  console.log(`posting ${notification} to ${room} with ${data}`)
+  io.to(room).emit(notification, data)
 
   res.end('delivered')
 })
