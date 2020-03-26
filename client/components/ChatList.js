@@ -57,7 +57,12 @@ const ChatList = () => {
               </Col>
               <Col xs={6}>{topic}</Col>
               <Col>
-                <Button className="float-right">Join</Button>
+                <Button variant="danger" className="float-right">
+                  Leave
+                </Button>
+                <Button variant="primary" className="float-right">
+                  Join
+                </Button>
               </Col>
             </Row>
           </ListGroup.Item>
