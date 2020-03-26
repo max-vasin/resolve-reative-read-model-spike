@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import { ListGroup, Badge, Row, Col, Button } from 'react-bootstrap'
 
 const ChatList = () => {
@@ -14,6 +14,7 @@ const ChatList = () => {
       userCount: 12
     }
   ])
+
   return (
     <div>
       <ListGroup>

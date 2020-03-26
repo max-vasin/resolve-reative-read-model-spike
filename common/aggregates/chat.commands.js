@@ -1,7 +1,11 @@
 import { CHAT_OPENED, CHAT_CLOSED, CHAT_USER_JOINED, CHAT_USER_LEAVED } from '../chat_events'
 
 export default {
-  open: ({ isOpened }, { payload: { topic, user } }) => {
+  open: ({ isOpened }, { aggregateId, payload: { topic, user } }) => {
+    if (!aggregateId) {
+      throw Error(`you should specify chat identifier`)
+    }
+
     if (isOpened) {
       throw Error(`the chat already opened`)
     }

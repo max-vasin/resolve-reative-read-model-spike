@@ -17,23 +17,38 @@ const appConfig = {
     }
   ],
   sagas: [
+    /*
     {
-      name: 'reactive-read-model-emulator',
-      source: 'common/sagas/reactive-read-model.saga.js',
+      name: 'rrm-emulator-chat',
+      source: 'common/sagas/chat-rrm.saga.js',
+      connectorName: 'default',
+      schedulerName: 'scheduler'
+    },
+    */
+    {
+      name: 'rrm-emulator-chat-list',
+      source: 'common/sagas/chat-list-rrm.saga.js',
       connectorName: 'default',
       schedulerName: 'scheduler'
     }
   ],
-  /*
+  apiHandlers: [
+    {
+      path: '/api/rrm/chat-list',
+      controller: 'common/api-handlers/chat-list-view.js',
+      method: 'GET'
+    }
+  ],
   readModels: [
     {
-      name: 'read-model-name',
-      projection: 'common/read-models/read-model-name.projection.js',
-      resolvers: 'common/read-models/read-model-name.resolvers.js',
+      name: 'chat-list-stub',
+      projection: 'common/read-models/chat-list-stub.projection.js',
+      resolvers: 'common/read-models/chat-list-stub.resolvers.js',
       connectorName: 'default'
     }
   ],
 
+  /*
   viewModels: [
     {
       name: 'view-model-name',

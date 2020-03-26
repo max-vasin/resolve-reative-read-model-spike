@@ -1,46 +1,18 @@
-import { MESSAGE_CREATED, MESSAGE_REMOVED } from '../message_events'
-import { CHAT_USER_JOINED, CHAT_USER_LEAVED } from '../chat_events'
+import { CHAT_USER_JOINED, CHAT_USER_LEAVED, CHAT_OPENED, CHAT_CLOSED } from '../chat_events'
+import { initDispatcher } from '../rrm'
 
 export default {
-  Init: async ({ store }) => {
-    await store.defineTable('views', {
-      indexes: { id: 'string' },
-      fields: ['view']
-    })
+  Init: async ({ store }) => initDispatcher(store, 'chat-list'),
+  [CHAT_OPENED]: async ({ dispatch }, { aggregateId, payload: { topic } }) => {
+    await dispatch('all', CHAT_OPENED, { chat: aggregateId, topic})
   },
-  [CHAT_USER_JOINED]: async ({ store, dispatch }, { aggregateId, payload: { user } }) => {
-    const { nickname } = await store.findOne('users', { id: user })
-    await dispatch(aggregateId, CHAT_USER_JOINED, {
-      user,
-      nickname
-    })
+  [CHAT_CLOSED]: async ({ dispatch }, { aggregateId }) => {
+    await dispatch('all', CHAT_CLOSED, { chat: aggregateId })
   },
-  [CHAT_USER_LEAVED]: async ({ dispatch }, { aggregateId, payload: { user } }) => {
-    await dispatch(aggregateId, CHAT_USER_LEAVED, {
-      user
-    })
+  [CHAT_USER_JOINED]: async ({ dispatch }, { aggregateId }) => {
+    await dispatch('all', CHAT_USER_JOINED, { chat: aggregateId })
   },
-  [MESSAGE_CREATED]: async ({ store, dispatch }, { aggregateId, payload: { chat, user, text } }) => {
-    const { nickname } = await store.findOne('users', { id: user })
-    await dispatch(chat, MESSAGE_CREATED, {
-      id: aggregateId,
-      user,
-      nickname,
-      text
-    })
-  },
-  [MESSAGE_REMOVED]: async ({ dispatch }, { aggregateId, payload: { chat } }) => {
-    await dispatch(chat, MESSAGE_REMOVED, {
-      id: aggregateId
-    })
+  [CHAT_USER_LEAVED]: async ({ dispatch }, { aggregateId }) => {
+    await dispatch('all', CHAT_USER_LEAVED, { chat: aggregateId })
   }
 }
-
-/*
-dispatch((scope, event) => {
-  const { state } = await store.findOne('views', { scope })
-  const updatedView = projection(state, event)
-  await store.update('views', { scope, state })
-  await
-})
-*/

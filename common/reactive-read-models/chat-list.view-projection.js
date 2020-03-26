@@ -1,35 +1,29 @@
-import { CHAT_CLOSED, CHAT_USER_JOINED, CHAT_USER_LEAVED } from '../chat_events'
-import { MESSAGE_CREATED, MESSAGE_REMOVED } from '../message_events'
+import { CHAT_OPENED, CHAT_CLOSED, CHAT_USER_JOINED, CHAT_USER_LEAVED } from '../chat_events'
 
 export default {
   Init: () => ({
-    closed: false,
-    members: [],
-    messages: []
+    chats: []
   }),
-  [MESSAGE_CREATED]: (state, { id, user, nickname, text }) => ({
+  [CHAT_OPENED]: (state, { chat, topic }) => ({
     ...state,
-    messages: state.messages.concat({
-      id,
-      user,
-      nickname,
-      text
-    })
+    chats: state.chats.concat({ id: chat, topic: topic || 'no topic', userCount: 1 })
   }),
-  [MESSAGE_REMOVED]: (state, { aggregateId }) => ({
+  [CHAT_CLOSED]: (state, { chat }) => ({
     ...state,
-    messages: state.messages.filter(msg => msg.id !== aggregateId)
+    chats: state.chats.filter(({ id }) => chat !== id)
   }),
-  [CHAT_USER_JOINED]: (state, { payload: { user, nickname } }) => ({
-    ...state,
-    members: state.members.concat({ user, nickname })
-  }),
-  [CHAT_USER_LEAVED]: (state, { payload: { user } }) => ({
-    ...state,
-    members: state.members.filter(member => member.user !== user)
-  }),
-  [CHAT_CLOSED]: state => ({
-    ...state,
-    closed: true
-  })
+  [CHAT_USER_JOINED]: (state, { chat }) => {
+    const entry = state.chats.find(({ id }) => id === chat)
+    entry.userCount++
+    return {
+      ...state
+    }
+  },
+  [CHAT_USER_LEAVED]: (state, { chat }) => {
+    const entry = state.chats.find(({ id }) => id === chat)
+    entry.userCount--
+    return {
+      ...state
+    }
+  }
 }

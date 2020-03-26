@@ -1,13 +1,9 @@
 import { MESSAGE_CREATED, MESSAGE_REMOVED } from '../message_events'
 import { CHAT_USER_JOINED, CHAT_USER_LEAVED } from '../chat_events'
+import { initDispatcher } from '../rrm'
 
 export default {
-  Init: async ({ store }) => {
-    await store.defineTable('views', {
-      indexes: { id: 'string' },
-      fields: ['view']
-    })
-  },
+  Init: async ({ store }) => initDispatcher(store, 'chat'),
   [CHAT_USER_JOINED]: async ({ store, dispatch }, { aggregateId, payload: { user } }) => {
     const { nickname } = await store.findOne('users', { id: user })
     await dispatch(aggregateId, CHAT_USER_JOINED, {
