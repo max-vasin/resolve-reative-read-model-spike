@@ -1,5 +1,6 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useEffect } from 'react'
 import { ListGroup, Badge, Row, Col, Button } from 'react-bootstrap'
+import { useQuery } from 'resolve-react-hooks'
 
 const ChatList = () => {
   const [chats, setChats] = useState([
@@ -14,6 +15,31 @@ const ChatList = () => {
       userCount: 12
     }
   ])
+
+  const fetchChats = useQuery(
+    {
+      name: 'chat-list-stub',
+      resolver: 'rrm',
+      args: {}
+    },
+    (err, result) => {
+      if (err) {
+        setChats([
+          {
+            id: 'ERROR',
+            topic: 'Unable to fetch chat list',
+            userCount: 666
+          }
+        ])
+      } else {
+        setChats(result.data.chats)
+      }
+    }
+  )
+
+  useEffect(() => {
+    fetchChats()
+  })
 
   return (
     <div>
