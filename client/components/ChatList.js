@@ -40,7 +40,7 @@ const ChatList = () => {
 
   useEffect(() => {
     fetchChats()
-    connect(console.log)
+    connect('chat-list', 'all', console.log)
   }, [])
 
   return (
