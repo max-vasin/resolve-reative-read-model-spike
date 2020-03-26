@@ -15,7 +15,7 @@ export const connect = (view, model, id, onViewUpdated) => {
       id
     }
   })
-  let capturedView = view
+  let capturedView = view || models[model].Init()
 
   socket.on('connect', () => {
     console.log(`connected to ${model}:${id}`)
