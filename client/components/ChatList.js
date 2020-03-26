@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { ListGroup, Badge, Row, Col, Button } from 'react-bootstrap'
 import { useQuery } from 'resolve-react-hooks'
+import { connect } from '../rrm'
 
 const ChatList = () => {
   const [chats, setChats] = useState([
@@ -39,7 +40,8 @@ const ChatList = () => {
 
   useEffect(() => {
     fetchChats()
-  })
+    connect(console.log)
+  }, [])
 
   return (
     <div>

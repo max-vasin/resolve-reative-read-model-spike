@@ -1,10 +1,4 @@
 export const dispatch = async (store, name, viewProjection, id, handler, payload) => {
-  console.log(name)
-  console.log(viewProjection)
-  console.log(id)
-  console.log(handler)
-  console.log(payload)
-
   const entry = await store.findOne(`${name}-views`, { id })
 
   let view
