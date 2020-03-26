@@ -1,8 +1,11 @@
+const axios = require('axios')
 const app = require('express')()
 const http = require('http').Server(app)
 const io = require('socket.io')(http)
 const parser = require('body-parser')
 const { port } = require('./constants')
+
+const appHost = 'http://localhost:3000'
 
 const getRoom = (model, id) => `${model}-${id}`
 
@@ -31,11 +34,17 @@ app.post('/', (req, res) => {
 io.use((socket, next) => {
   const { model, id } = socket.handshake.query
 
-  if (!model || !id) {
-    return next(Error(`model ${model}, id ${id} - something is missing`))
-  }
-
-  return next()
+  axios
+    .get(`${appHost}/api/query/${model}-stub/connect`, {
+      params: {
+        id
+      }
+    })
+    .then(() => next())
+    .catch(err => {
+      console.log(`connector invocation failed ${err}`)
+      next(err)
+    })
 })
 
 io.on('connection', socket => {

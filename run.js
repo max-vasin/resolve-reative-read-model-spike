@@ -28,8 +28,8 @@ void (async () => {
         await reset(resolveConfig, {
           dropEventStore: false,
           dropSnapshots: true,
-          dropReadModels: true,
-          dropSagas: true
+          dropReadModels: false,
+          dropSagas: false
         })
 
         await watch(resolveConfig)

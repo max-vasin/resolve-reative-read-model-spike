@@ -4,18 +4,7 @@ import { useQuery } from 'resolve-react-hooks'
 import { connect } from '../rrm'
 
 const ChatList = () => {
-  const [chats, setChats] = useState([
-    {
-      id: '#chat-a',
-      topic: 'Funny people meeting',
-      userCount: 10
-    },
-    {
-      id: '#chat-b',
-      topic: 'Join us and prosper',
-      userCount: 12
-    }
-  ])
+  const [chats, setChats] = useState([])
 
   const fetchChats = useQuery(
     {
@@ -33,8 +22,8 @@ const ChatList = () => {
           }
         ])
       } else {
-        setChats(result.data.chats)
-        connect(result.data, 'chat-list', 'all', data => setChats(data.chats))
+        setChats(result.data ? result.data.chats : [])
+        connect(result.data, 'chat-list', 'all', data => setChats(data ? data.chats : []))
       }
     }
   )
