@@ -1,7 +1,7 @@
-import React from 'react'
-import { Navbar, Form, FormControl, Button } from 'react-bootstrap'
+import React, { useState } from 'react'
+import { Navbar, Form, FormControl, Button, Container, Row, Col } from 'react-bootstrap'
 import { Helmet } from 'react-helmet'
-import { useStaticResolver } from 'resolve-react-hooks'
+import { useStaticResolver, useCommandBuilder } from 'resolve-react-hooks'
 
 const Header = ({ title, name, css, favicon }) => {
   const resolveStatic = useStaticResolver()
@@ -19,6 +19,25 @@ const Header = ({ title, name, css, favicon }) => {
     name: 'viewport',
     content: 'width=device-width, initial-scale=1'
   }
+  const [chatId, setChatId] = useState('')
+
+  const openChat = useCommandBuilder(
+    ({ id }) => ({
+      type: 'open',
+      aggregateId: id,
+      aggregateName: 'chat',
+      payload: {}
+    }),
+    error => {
+      if (error) {
+        console.error(error)
+      }
+      setChatId('')
+    }
+  )
+  const chatIdChanged = e => {
+    setChatId(e.target.value)
+  }
 
   return (
     <div>
@@ -26,10 +45,23 @@ const Header = ({ title, name, css, favicon }) => {
       <Navbar variant="dark" bg="primary" collapseOnSelect>
         <Navbar.Brand href="/">{name}</Navbar.Brand>
         <Navbar.Toggle />
-        <Form inline className="float-right">
-          <FormControl type="text" placeholder="topic" className="mr-sm-2" />
-          <Button variant="info">Open Chat</Button>
-        </Form>
+        <Container>
+          <Row>
+            <Col>
+              <Form inline className="float-right">
+                <FormControl
+                  type="text"
+                  placeholder="#identifier"
+                  className="mr-sm-2"
+                  onChange={chatIdChanged}
+                />
+                <Button variant="info" onClick={() => openChat({ id: chatId })}>
+                  Open Chat
+                </Button>
+              </Form>
+            </Col>
+          </Row>
+        </Container>
       </Navbar>
     </div>
   )

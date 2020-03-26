@@ -1,7 +1,7 @@
 import { CHAT_OPENED, CHAT_CLOSED, CHAT_USER_JOINED, CHAT_USER_LEAVED } from '../chat_events'
 
 export default {
-  open: ({ isOpened }, { payload: { topic } }) => {
+  open: ({ isOpened }, { payload: { topic, user } }) => {
     if (isOpened) {
       throw Error(`the chat already opened`)
     }
@@ -9,7 +9,8 @@ export default {
     return {
       type: CHAT_OPENED,
       payload: {
-        topic
+        topic,
+        user
       }
     }
   },
